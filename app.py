@@ -119,7 +119,7 @@ def add_task():
         mongo.db.tasks.insert_one(task)
         flash("Task successfully added")
         return redirect(url_for("get_tasks"))
-    categories = mongo.db.categories.find().sort("categories_name", 1)
+    categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_task.html", categories=categories)
 
 
@@ -139,7 +139,7 @@ def edit_task(task_id):
         flash("Task successfully updated")
 
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
-    categories = mongo.db.categories.find().sort("categories_name", 1)
+    categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("edit_task.html", task=task, categories=categories)
 
 
@@ -152,7 +152,7 @@ def delete_task(task_id):
 
 @app.route("/get_categories")
 def get_categories():
-    categories = list(mongo.db.categories.find().sort("categories_name", 1))
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
 
 
